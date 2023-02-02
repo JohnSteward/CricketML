@@ -1,0 +1,165 @@
+{
+    "country": "INDIA",
+    "format": "T20",
+    "international": null,
+    "match": {
+        "battingTeam": {
+            "batsman": {
+                "id": "13247434068175",
+                "isRightHanded": false,
+                "name": "SHAHBAZ AHMED"
+            },
+            "batsmanPartner": {
+                "id": "13174864922488",
+                "isRightHanded": true,
+                "name": "SHERFANE RUTHERFORD"
+            },
+            "home": true,
+            "id": "12865944325687",
+            "name": "BANGALORE-ROYAL-CHALLENGERS"
+        },
+        "bowlingTeam": {
+            "bowler": {
+                "id": "12946643670784",
+                "isRightHanded": true,
+                "name": "Umesh Yadav",
+                "spell": 1
+            },
+            "bowlerPartner": {
+                "id": null,
+                "isRightHanded": null,
+                "name": null
+            },
+            "home": false,
+            "name": "KOLKATA-KNIGHT-RIDERS"
+        },
+        "delivery": {
+            "additionalEventInformation": {
+                "dropped": null
+            },
+            "deliveryNumber": {
+                "ball": 6,
+                "day": 1,
+                "innings": 2,
+                "over": 14
+            },
+            "deliveryType": "Seam",
+            "fielderPosition": {
+                "1st Slip": false,
+                "2nd Slip": false,
+                "3rd Slip": false,
+                "4th Slip": false,
+                "5th Slip": false,
+                "Backwards Point": false,
+                "Cover": false,
+                "Cow Corner": false,
+                "Deep Backwards Square Leg": false,
+                "Deep Cover": false,
+                "Deep Extra Cover": false,
+                "Deep Mid Wicket": false,
+                "Deep Point": false,
+                "Deep Square Leg": false,
+                "Extra Cover": false,
+                "Fine Leg": false,
+                "Fly Slip": false,
+                "Gully": false,
+                "Leg Gully": false,
+                "Leg Slip": false,
+                "Long Leg": false,
+                "Long-off": false,
+                "Long-on": false,
+                "Mid Wicket": false,
+                "Mid-off": false,
+                "Mid-on": false,
+                "Point": false,
+                "Short Extra Cover": false,
+                "Short Fine Leg": false,
+                "Short Leg": false,
+                "Short Mid-wicket": false,
+                "Silly Mid-off": false,
+                "Silly Point": false,
+                "Square Leg": false,
+                "Third Man": false,
+                "Wicket Keeper": false
+            },
+            "isPavilionEnd": false,
+            "round": false,
+            "scoringInformation": {
+                "boundary": null,
+                "extrasScore": 0,
+                "extrasType": "None",
+                "overthrowScore": null,
+                "score": 1,
+                "wicket": {
+                    "isWicket": false,
+                    "wicketType": null,
+                    "wicketsTaken": null
+                }
+            },
+            "shotInformation": {
+                "batsmanWeight": "Unset",
+                "shotAttacked": "Attacked",
+                "shotPlayed": "Played",
+                "shotTypeAdditional": "None"
+            },
+            "timecode": "701995192000000",
+            "trajectory": {
+                "batStatPosition": {
+                    "x": 0,
+                    "y": 0
+                },
+                "bounceAboveStumps": null,
+                "bounceAngle": 6.703017890854065,
+                "bouncePosition": {
+                    "x": 2.863289,
+                    "y": -0.22109,
+                    "z": 0
+                },
+                "cof": 0.233604344824649,
+                "cor": 0.6405300159596685,
+                "creasePosition": {
+                    "x": -8.840499,
+                    "y": -0.19449,
+                    "z": 0.233632
+                },
+                "deviation": 0.3708207851948957,
+                "dropAngle": -9.72687088801006,
+                "hitStumps": null,
+                "impactPosition": {
+                    "x": -8.191203,
+                    "y": -0.205025,
+                    "z": 0.166235
+                },
+                "initialAngle": -4.475693261257917,
+                "landingPosition": {
+                    "x": 51,
+                    "y": 138,
+                    "z": 0
+                },
+                "length": null,
+                "offBatAngle": 1000000,
+                "offBatSpeed": -1,
+                "pbr": 82.71906791148538,
+                "reactionTime(to crease)": 0.503265380859375,
+                "reactionTime(to interception)": 0.4721145629882813,
+                "realDistance": 0,
+                "releasePosition": {
+                    "x": 8.341176336696904,
+                    "y": -0.3523931432776438,
+                    "z": 1.955517945089014
+                },
+                "releaseSpeed": 83.77629766402245,
+                "spinRate": 0,
+                "stumpPosition": {
+                    "x": -10.05998357191451,
+                    "y": -0.174603173764905,
+                    "z": 0.3481290188436609
+                },
+                "swing": 0.1297427217719196,
+                "trajectoryData": "<Bounce Position>2.863289 -0.221090 <Bounce Time> 7.89920954148254e-01<Acceleration>-2.56531669534021e-01  1.04823049331044e-01 -6.34880670984512e+00  <Pre Bounce Velocity>-3.33491170394228e+01  3.21408860590787e-01 -5.71656749182934e+00  <Post Bounce Velocity>-3.11558342983456e+01  5.01946698815534e-01  3.66163306677597e+00  <Post Bounce Acceleration>-1.66745585197114e-01  0.00000000000000e+00 -1.06000000000000e+01  <Bounce Height> 5.44729893011563e-02<Last Update Time> 0.00000000000000e+00<Kalman Filter Type>2<Predicted>false<Quality>1<Warning>false<Stop Y Acceleration Prediction Post Interception>true<xPositionAtBatsman>-8.19089535302501e+00<Track Approved>true<Interception Approved>true<DRS Approved>false<Zero Time> 7.01995192152693e+08<Trajectory Speed> 3.75445361089977e+01<Trajectory Speed Sent>true<Distance Of Six (m)>-1.00000000000000e+00<Speed Off Bat(mps)>-1.00000000000000e+00<Angle Off Bat (Degrees)> 1.00000000000000e+06<Momentum Multiplier>-1.00000000000000e+00<Software Version>\"D:\\Cricket\\Logger\\Logger_2021_02_18_Magneto.exe\"<Bat Hit (true/false)>false<Bat Impact Position> 0.00000000000000e+00  0.00000000000000e+00  <Batsman Weight>\"Unset\"<Swing Distance (m)> 1.67315559935962e-02<COF on home pitch> 1.00000000000000e+00<COR on home pitch> 1.00000000000000e+00<Reaction Time (To Popping Crease, s)> 5.03265380859375e-01<Bowler>\"bowler name\"<Bowling End>0<Delivery Time and Date>\"2022/03/30 22:39:13.620\"<Delivery Stumps Time and Date>\"2022/03/30 22:39:13.329\""
+            }
+        },
+        "name": "BANGALORE-ROYAL-CHALLENGERS_KOLKATA-KNIGHT-RIDERS_T20_6_DR-DY-PATIL-SPORTS-ACADEMY-MUMBAI_13293122423661"
+    },
+    "tourName": "INDIA_22_MAR_13292774873183_STAR-IPL"
+}
