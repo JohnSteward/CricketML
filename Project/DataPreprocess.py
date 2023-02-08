@@ -28,3 +28,9 @@ allBalls.to_pickle('ballData.pkl')
 allBalls.info()
 df = pd.read_pickle('ballData.pkl')
 df.info()
+
+pathToHawkeye = 'C:/Users/John Steward/Documents/GitHub/BachelorProject/Project/HawkeyeStats-main/mensIPLHawkeyeStats.csv'
+hawkeyeStats = pd.read_csv(pathToHawkeye)
+hawkeyeStats.to_pickle('hawkeyeStats.pkl')
+df = pd.read_pickle('hawkeyeStats.pkl')
+df.info()
