@@ -1,0 +1,8 @@
+Notes to self about data:
+Innings data mainly includes more in-depth batting card for each batsman-bowler matchup, with number of balls, runs, 1s, 2s..., wicket,
+which wicket, how they were out, dot balls, percentages, strike rate, extras, what ball people were out in
+
+BallData is what I need to use to actually predict runs, given the situation: batsman-bowler matchup, batting partner, home or away
+Want to predict "score", or wicket
+
+How tf do I use all the data to then only predict from ball data input????
