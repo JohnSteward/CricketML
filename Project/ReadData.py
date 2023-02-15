@@ -20,9 +20,12 @@ pathToBall = 'C:/Users/John Steward/Documents/GitHub/BachelorProject/Project/ipl
 ballList = glob.glob(pathToBall)
 
 for file in ballList:
+    # Load the json file into a dataframe and flatten the nested dictionaries
     with open(file, 'r') as f:
         data = json.loads(f.read())
     df = pd.json_normalize(data, max_level=3)
+    # Drop consistent or unnecessary columns
+    df.drop(['country', 'format', 'international', 'tourName', 'match.name'], axis=1, inplace=True)
     ballDataFrames.append(df)
 
 allBalls = pd.concat(ballDataFrames, ignore_index=True)
