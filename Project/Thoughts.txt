@@ -7,8 +7,5 @@ Want to predict "score", or wicket
 
 How tf do I use all the data to then only predict from ball data input????
 
-Create array of all player names, make separate dataframe for each player, with that being the feature vector (hand, run rate, average runs in each over,
-    run rate per bowler (will need arrays of all batsmen then all bowlers), average weight(set, unset...) overall and per bowler,
-    aggressiveness overall and per bowler)
-Bowler vector: (hand, dot ball ratio, boundary ratio, delivery style, wicket+dropped ratio, 1 ratio, 2 ratio, 3 ratio (all overall and per batsman))
-    This is gonna be long as shit
+
+Look at Multiple Correspondence Analysis maybe for non-numeric data (names)
