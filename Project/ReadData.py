@@ -16,6 +16,8 @@ import glob
 # allInnings.to_pickle('inningsData.pkl')
 # Make all the ball data into a dataframe
 ballDataFrames = []
+batsmanList = []
+bowlerList = []
 pathToBall = 'C:/Users/John Steward/Documents/GitHub/BachelorProject/Project/ipl_2022_data/BallData/*'
 ballList = glob.glob(pathToBall)
 
@@ -27,7 +29,17 @@ for file in ballList:
     # Drop consistent or unnecessary columns
     df.drop(['country', 'format', 'international', 'tourName', 'match.name'], axis=1, inplace=True)
     ballDataFrames.append(df)
+ # Create a list of players to correspond to a feature vector for each (so far will be a separate dataframe)
+    batsmanName = df["match.battingTeam.batsman.name"]
+    if batsmanName not in batsmanList:
+        batsmanList.append(batsmanName)
+    bowlerName = df["match.bowlingTeam.bowler.name"]
+    if bowlerName not in bowlerList:
+        bowlerList.append(bowlerName)
 
+    # TODO: Create a list of dataframes, one for each player as a feature vector, corresponding to batsmanList and
+    #       bowlerList
+    #  Make all string data categorical (like shotPlayed, attacked...)
 allBalls = pd.concat(ballDataFrames, ignore_index=True)
 allBalls.to_pickle('ballData.pkl')
 allBalls.info()
