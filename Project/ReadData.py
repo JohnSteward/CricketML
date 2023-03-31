@@ -60,10 +60,7 @@ for file in ballList:
     addShot = df["match.delivery.shotInformation.shotTypeAdditional"]
     if addShot.item() not in addShotTypeList:
         addShotTypeList.append(addShot.item())
-    # TODO: Create a list of dataframes, one for each player as a feature vector, corresponding to batsmanList and
-    #       bowlerList
-    #  Make all string data categorical (like shotPlayed, attacked...). Compile a list of all the delivery types,
-    #  then run through the dataframe, replacing the strings with the index in the list.
+
 print(deliveryList)
 print(extrasList)
 print(attackedList)
@@ -72,32 +69,118 @@ print(addShotTypeList)
 
 # Replacing all relevant strings with a numerical ID
 for file in ballDataFrames:
-    for i in range(len(deliveryList) - 1):
+    for i in range(len(deliveryList)):
         if deliveryList[i] == file["match.delivery.deliveryType"].item():
             file["match.delivery.deliveryType"] = file["match.delivery.deliveryType"].replace(deliveryList[i], i)
-    for j in range(len(extrasList) - 1):
+    for j in range(len(extrasList)):
         if extrasList[j] == file["match.delivery.scoringInformation.extrasType"].item():
             file["match.delivery.scoringInformation.extrasType"] = file["match.delivery.scoringInformation.extrasType"].replace(extrasList[j], j)
-    for k in range(len(attackedList) - 1):
+    for k in range(len(attackedList)):
         if attackedList[k] == file["match.delivery.shotInformation.shotPlayed"].item():
             file["match.delivery.shotInformation.shotPlayed"] = file["match.delivery.shotInformation.shotPlayed"].replace(attackedList[k], k)
-    for l in range(len(playedList) - 1):
+    for l in range(len(playedList)):
         if playedList[l] == file["match.delivery.shotInformation.shotPlayed"].item():
             file["match.delivery.shotInformation.shotPlayed"] = file["match.delivery.shotInformation.shotPlayed"].replace(playedList[l], l)
-    for m in range(len(addShotTypeList) - 1):
+    for m in range(len(addShotTypeList)):
         if addShotTypeList[m] == file["match.delivery.shotInformation.shotTypeAdditional"].item():
             file["match.delivery.shotInformation.shotTypeAdditional"] = file["match.delivery.shotInformation.shotTypeAdditional"].replace(addShotTypeList[m], m)
 
 for batsman in batsmanList:
     totalRuns = 0
+    runsVsSpin = 0
+    runsVsSeam = 0
+    runsVsMed = 0
+    earlyOverRuns = 0
+    midOverRuns = 0
+    lateOverRuns = 0
     totalBalls = 0
+    ballsSpin = 0
+    ballsSeam = 0
+    ballsMed = 0
     attackedNo = 0
     defendNo = 0
+    attackSpin = 0
+    attackSeam = 0
+    attackMed = 0
+    defendSpin = 0
+    defendSeam = 0
+    defendMed = 0
     for file in ballDataFrames:
         if file["match.battingTeam.batsman.name"].item() == batsman:
             totalRuns += file["match.delivery.scoringInformation.score"].item()
             totalBalls += 1
+            if file["match.delivery.deliveryType"].item() == 0:
+                ballsSpin += 1
+                runsVsSpin += file["match.delivery.scoringInformation.score"].item()
+                if file["match.delivery.shotInformation.shotPlayed"].item() == 0:
+                    attackSpin += 1
+                elif file["match.delivery.shotInformation.shotPlayed"].item() == 1:
+                    defendSpin += 1
+            elif file["match.delivery.deliveryType"].item() == 1:
+                ballsSeam += 1
+                runsVsSeam += file["match.delivery.scoringInformation.score"].item()
+                if file["match.delivery.shotInformation.shotPlayed"].item() == 0:
+                    attackSeam += 1
+                elif file["match.delivery.shotInformation.shotPlayed"].item() == 1:
+                    defendSeam += 1
+            elif file["match.delivery.deliveryType"].item() == 2:
+                ballsMed += 1
+                runsVsMed += file["match.delivery.scoringInformation.score"].item()
+                if file["match.delivery.shotInformation.shotPlayed"].item() == 0:
+                    attackMed += 1
+                elif file["match.delivery.shotInformation.shotPlayed"].item() == 1:
+                    defendMed += 1
 
+            if file["match.delivery.deliveryNumber.over"].item() <= 5:
+                earlyOverRuns += file["match.delivery.scoringInformation.score"].item()
+            elif (file["match.delivery.deliveryNumber.over"].item() > 5) and file["match.delivery.deliveryNumber.over"].item() <= 15:
+                midOverRuns += file["match.delivery.scoringInformation.score"].item()
+            elif file["match.delivery.deliveryNumber.over"].item() > 15:
+                lateOverRuns += file["match.delivery.scoringInformation.score"].item()
+
+            attackedNo = attackSpin + attackSeam + attackMed
+            defendNo = defendSpin + defendSeam + defendMed
+    if totalBalls > 0:
+        strikeRate = (totalRuns/totalBalls)*100
+        aggression = attackedNo / totalBalls
+        passiveness = defendNo / totalBalls
+    else:
+        strikeRate = 0
+        aggression = 0
+        passiveness = 0
+    if ballsSpin > 0:
+        strikeSpin = (runsVsSpin/ballsSpin)*100
+        aggSpin = attackSpin / ballsSpin
+        pasSpin = defendSpin / ballsSpin
+    else:
+        strikeSpin = 0
+        aggSpin = 0
+        pasSpin = 0
+    if ballsSeam > 0:
+        strikeSeam = (runsVsSeam/ballsSeam)*100
+        aggSeam = attackSeam / ballsSeam
+        pasSeam = defendSeam / ballsSeam
+    else:
+        strikeSeam = 0
+        aggSeam = 0
+        pasSeam = 0
+    if ballsMed > 0:
+        strikeMed = (runsVsMed/ballsMed)*100
+        aggMed = attackMed / ballsMed
+        pasMed = defendMed / ballsMed
+    else:
+        strikeMed = 0
+        aggMed = 0
+        pasMed = 0
+
+
+
+
+
+
+
+
+    # TODO: Create the individual dataframes for each batsman, with all the values calced here
 for bowler in bowlerList:
     totalBalls = 0
     totalRuns = 0
@@ -128,7 +211,15 @@ for bowler in bowlerList:
                 totalRuns += 6
             if (file["match.delivery.scoringInformation.wicket.isWicket"].item() == True) or (file["match.delivery.additionalEventInformation.dropped"].item() == True):
                 totalWicketsOrDropped += 1
-
+    noOvers = totalBalls//6
+    economy = totalRuns/noOvers
+    dotRat = totalDots/totalBalls
+    oneRat = totalOnes/totalBalls
+    twoRat = totalTwos / totalBalls
+    threeRat = totalThrees / totalBalls
+    fourRat = totalFours / totalBalls
+    sixRat = totalSixes / totalBalls
+    # TODO: potentially do stats for against aggressive/passive batsmen, but will take reading feature vectors from batsmen
 
 # allBalls = pd.concat(ballDataFrames, ignore_index=True)
 # allBalls.to_pickle('ballData.pkl')
