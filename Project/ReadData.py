@@ -85,6 +85,7 @@ for file in ballDataFrames:
         if addShotTypeList[m] == file["match.delivery.shotInformation.shotTypeAdditional"].item():
             file["match.delivery.shotInformation.shotTypeAdditional"] = file["match.delivery.shotInformation.shotTypeAdditional"].replace(addShotTypeList[m], m)
 
+batsmanDataList = []
 for batsman in batsmanList:
     totalRuns = 0
     runsVsSpin = 0
@@ -144,10 +145,16 @@ for batsman in batsmanList:
         strikeRate = (totalRuns/totalBalls)*100
         aggression = attackedNo / totalBalls
         passiveness = defendNo / totalBalls
+        earlyRat = earlyOverRuns/totalRuns
+        midRat = midOverRuns/totalRuns
+        lateRat = lateOverRuns/totalRuns
     else:
         strikeRate = 0
         aggression = 0
         passiveness = 0
+        earlyRat = 0
+        midRat = 0
+        lateRat = 0
     if ballsSpin > 0:
         strikeSpin = (runsVsSpin/ballsSpin)*100
         aggSpin = attackSpin / ballsSpin
@@ -173,14 +180,21 @@ for batsman in batsmanList:
         aggMed = 0
         pasMed = 0
 
+    batData = {'Name': batsman, 'strikeRate': strikeRate, 'strikeSpin': strikeSpin, 'strikeSeam': strikeSeam,
+               'strikeMed': strikeMed, 'earlyRat': earlyRat, 'midRat': midRat, 'lateRat': lateRat,
+               'aggression': aggression, 'aggSpin': aggSpin, 'aggSeam': aggSeam, 'aggMed': aggMed,
+               'passiveness': passiveness, 'pasSpin': pasSpin, 'pasSeam': pasSeam, 'pasMed': pasMed}
+    df = pd.DataFrame(batData)
+    batsmanDataList.append(df)
+
+for file in ballDataFrames:
+    for batsman in batsmanDataList:
+        if file["match.battingTeam.batsman.name"].item() == batsman["Name"].item():
+            file["match.battingTeam.batsman.name"].replace(batsman["Name"].item(), batsman)
 
 
 
-
-
-
-
-    # TODO: Create the individual dataframes for each batsman, with all the values calced here
+bowlDataList = []
 for bowler in bowlerList:
     totalBalls = 0
     totalRuns = 0
@@ -195,6 +209,8 @@ for bowler in bowlerList:
         if file["match.bowlingTeam.bowler.name"].item() == bowler:
             totalBalls += 1
             if file["match.delivery.scoringInformation.score"].item() == 1:
+                totalDots += 1
+            elif file["match.delivery.scoringInformation.score"].item() == 1:
                 totalOnes += 1
                 totalRuns += 1
             elif file["match.delivery.scoringInformation.score"].item() == 2:
@@ -219,7 +235,17 @@ for bowler in bowlerList:
     threeRat = totalThrees / totalBalls
     fourRat = totalFours / totalBalls
     sixRat = totalSixes / totalBalls
-    # TODO: potentially do stats for against aggressive/passive batsmen, but will take reading feature vectors from batsmen
+    wicRat = totalWicketsOrDropped/totalBalls
+
+    bowlData = {'Name': bowler, 'economy': economy, 'dotRat': dotRat, 'oneRat': oneRat, 'twoRat': twoRat,
+                'threeRat': threeRat, 'fourRat': fourRat, 'sixRat': sixRat, 'wicRat': wicRat}
+    df = pd.DataFrame(bowlData)
+    bowlDataList.append(df)
+
+for file in ballDataFrames:
+    for bowler in bowlDataList:
+        if file["match.bowlingTeam.bowler.name"].item() == bowler["Name"].item():
+            file["match.bowlingTeam.bowler.name"].replace(bowler["Name"].item(), bowler)
 
 # allBalls = pd.concat(ballDataFrames, ignore_index=True)
 # allBalls.to_pickle('ballData.pkl')

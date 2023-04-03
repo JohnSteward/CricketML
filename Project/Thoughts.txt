@@ -1,15 +1,17 @@
 Notes to self about data:
-Innings data mainly includes more in-depth batting card for each batsman-bowler matchup, with number of balls, runs, 1s, 2s..., wicket,
-which wicket, how they were out, dot balls, percentages, strike rate, extras, what ball people were out in
+Innings data mainly includes more in-depth batting card for each batsman-bowler matchup, with number of balls, runs, 1s, 2s...,
+wicket, which wicket, how they were out, dot balls, percentages, strike rate, extras, what ball people were out in
 
 BallData is what I need to use to actually predict runs, given the situation: batsman-bowler matchup, batting partner, home or away
-Want to predict "score", or wicket
+Want to predict "score" and, if dot ball, check for wicket, which I think will probably just reduce runs.
+Or maybe just don't touch wickets, are there are ethical and game-changing implications when it comes to awarding
+wickets, like a change in run-rate, or just the concept of being out "by formula". If it just reduces runs, but adds
+to the wickets for the ML algorithm
 
+How tf do I use all the data to then only predict from ball data input????
 
+Hmm neither json datasets allow me to easily see how many runs/wickets the team is on at that point in time. Would need
+to add it up as I went along, not sure if that's possible when I'm running an ML algorithm. This may have to be naive
+in that case, just kind of looking at averages for that specific ball.
 
-Create array of all player names, make separate dataframe for each player, with that being the feature vector (hand, run rate, average runs in each over,
-    run rate per bowler type (will need arrays of all batsmen then all bowlers),
-    aggressiveness overall and per bowler type)
-Bowler vector: (hand, dot ball ratio, boundary ratio, delivery style, wicket+dropped ratio, 1 ratio, 2 ratio, 3 ratio, economy (runs/overs))
-
-    This is gonna be long as shit
+Looks like this only works on categorical data, so will need to encode the strings in order to use MCA.
