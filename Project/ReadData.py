@@ -31,6 +31,7 @@ for file in ballList:
     # Load the json file into a dataframe and flatten the nested dictionaries
     with open(file, 'r') as f:
         data = json.loads(f.read())
+        # TODO: Remove the trajectory data as it cannot be used for tests
     df = pd.json_normalize(data)
     # Drop consistent or unnecessary columns
     df.drop(['country', 'format', 'international', 'tourName', 'match.name', 'match.battingTeam.id',
