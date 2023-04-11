@@ -11,6 +11,6 @@ ballData.info()
 # Split data into train(80%) and test(20%)
 train, test = train_test_split(ballData, test_size=0.2, shuffle=True)
 print(train.shape, test.shape)
-
+target = train['match.delivery.scoringInformation.score']
 model = gpc()
-model.fit(train, test)
+model.fit(train, target)
