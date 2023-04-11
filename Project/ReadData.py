@@ -96,8 +96,8 @@ for file in ballDataFrames:
         if extrasList[j] == file["match.delivery.scoringInformation.extrasType"].item():
             file["match.delivery.scoringInformation.extrasType"] = file["match.delivery.scoringInformation.extrasType"].replace(extrasList[j], j)
     for k in range(len(attackedList)):
-        if attackedList[k] == file["match.delivery.shotInformation.shotPlayed"].item():
-            file["match.delivery.shotInformation.shotPlayed"] = file["match.delivery.shotInformation.shotPlayed"].replace(attackedList[k], k)
+        if attackedList[k] == file["match.delivery.shotInformation.shotAttacked"].item():
+            file["match.delivery.shotInformation.shotAttacked"] = file["match.delivery.shotInformation.shotAttacked"].replace(attackedList[k], k)
     for l in range(len(playedList)):
         if playedList[l] == file["match.delivery.shotInformation.shotPlayed"].item():
             file["match.delivery.shotInformation.shotPlayed"] = file["match.delivery.shotInformation.shotPlayed"].replace(playedList[l], l)
@@ -202,6 +202,8 @@ for batsman in batsmanList:
         aggMed = 0
         pasMed = 0
 
+
+
     batData = {'batsmanName': batsman, 'strikeRate': strikeRate, 'strikeSpin': strikeSpin, 'strikeSeam': strikeSeam,
                'strikeMed': strikeMed, 'earlyRat': earlyRat, 'midRat': midRat, 'lateRat': lateRat,
                'aggression': aggression, 'aggSpin': aggSpin, 'aggSeam': aggSeam, 'aggMed': aggMed,
@@ -209,19 +211,30 @@ for batsman in batsmanList:
     df = pd.DataFrame(data=batData, index=[0])
 
     batsmanDataList.append(df)
-
 for file in ballDataFrames:
     for batsman in batsmanDataList:
         if file["match.battingTeam.batsman.name"].item() == batsman["batsmanName"].item():
-            finalFile = pd.concat([file, batsman], ignore_index=True)
-            finalBallFrames.append(finalFile)
-            # file.info()
-            # finalFile.info()
-            #finalFile.drop(['match.bowlingTeam.bowler.name'][1])
-           # print(finalFile['match.bowlingTeam.bowler.name'][1])
+            file['batsmanName'] = batsman["batsmanName"].item()
+            file['strikeRate'] = batsman['strikeRate'].item()
+            file['strikeSpin'] = batsman['strikeSpin'].item()
+            file['strikeSeam'] = batsman['strikeSeam'].item()
+            file['strikeMed'] = batsman['strikeMed'].item()
+            file['earlyRat'] = batsman['earlyRat'].item()
+            file['midRat'] = batsman['midRat'].item()
+            file['lateRat'] = batsman['lateRat'].item()
+            file['aggression'] = batsman['aggression'].item()
+            file['aggSpin'] = batsman['aggSpin'].item()
+            file['aggSeam'] = batsman['aggSeam'].item()
+            file['aggMed'] = batsman['aggMed'].item()
+            file['passiveness'] = batsman['passiveness'].item()
+            file['pasSpin'] = batsman['pasSpin'].item()
+            file['pasSeam'] = batsman['pasSeam'].item()
+            file['pasMed'] = batsman['pasMed'].item()
+            #print(finalFile.isnull().values.any())
+            finalBallFrames.append(file)
 
-
-
+    # file.info()
+    # print(file.isnull().values.any())
 bowlDataList = []
 for bowler in bowlerList:
     totalBalls = 0
@@ -234,26 +247,26 @@ for bowler in bowlerList:
     totalSixes = 0
     totalWicketsOrDropped = 0
     for file in finalBallFrames:
-        if file["match.bowlingTeam.bowler.name"][0] == bowler:
+        if file["match.bowlingTeam.bowler.name"].item() == bowler:
             totalBalls += 1
-            if file["match.delivery.scoringInformation.score"][0] == 1:
+            if file["match.delivery.scoringInformation.score"].item() == 1:
                 totalDots += 1
-            elif file["match.delivery.scoringInformation.score"][0] == 1:
+            elif file["match.delivery.scoringInformation.score"].item() == 1:
                 totalOnes += 1
                 totalRuns += 1
-            elif file["match.delivery.scoringInformation.score"][0] == 2:
+            elif file["match.delivery.scoringInformation.score"].item() == 2:
                 totalTwos += 1
                 totalRuns += 2
-            elif file["match.delivery.scoringInformation.score"][0] == 3:
+            elif file["match.delivery.scoringInformation.score"].item() == 3:
                 totalThrees += 1
                 totalRuns += 3
-            elif file["match.delivery.scoringInformation.score"][0] == 4:
+            elif file["match.delivery.scoringInformation.score"].item() == 4:
                 totalFours += 1
                 totalRuns += 4
-            elif file["match.delivery.scoringInformation.score"][0] == 6:
+            elif file["match.delivery.scoringInformation.score"].item() == 6:
                 totalSixes += 1
                 totalRuns += 6
-            if (file["match.delivery.scoringInformation.wicket.isWicket"][0] == True) or (file["match.delivery.additionalEventInformation.dropped"][0] == True):
+            if (file["match.delivery.scoringInformation.wicket.isWicket"].item() == True) or (file["match.delivery.additionalEventInformation.dropped"].item() == True):
                 totalWicketsOrDropped += 1
     noOvers = totalBalls/6
     if noOvers > 0:
@@ -285,14 +298,29 @@ for bowler in bowlerList:
 for file in finalBallFrames:
     for bowler in bowlDataList:
         if file["match.bowlingTeam.bowler.name"][0] == bowler["bowlerName"].item():
-            fullFinalFile = pd.concat([file, bowler], ignore_index=True)
+            file['bowlerName'] = bowler['bowlerName']
+            file['economy'] = bowler['economy']
+            file['dotRat'] = bowler['dotRat']
+            file['oneRat'] = bowler['oneRat']
+            file['twoRat'] = bowler['twoRat']
+            file['threeRat'] = bowler['threeRat']
+            file['fourRat'] = bowler['fourRat']
+            file['sixRat'] = bowler['sixRat']
+            file['wicRat'] = bowler['wicRat']
             # fullFinalFile.info()
-            fullFinalFrames.append(fullFinalFile)
+            fullFinalFrames.append(file)
 
 allBalls = pd.concat(fullFinalFrames, ignore_index=True)
-allBalls.to_pickle('ballData.pkl')
 allBalls.info()
-df = pd.read_pickle('ballData.pkl')
+allBalls.drop(['match.battingTeam.batsman.name', 'match.battingTeam.batsmanPartner.id', 'match.battingTeam.batsmanPartner.name',
+               'match.battingTeam.name', 'match.bowlingTeam.bowler.id', 'match.bowlingTeam.bowler.name',
+               'match.bowlingTeam.name', 'batsmanName', 'bowlerName', 'match.delivery.additionalEventInformation.dropped',
+               'match.delivery.scoringInformation.boundary', 'match.delivery.scoringInformation.overthrowScore',
+               'match.delivery.scoringInformation.wicket.wicketType', 'match.delivery.scoringInformation.wicket.wicketsTaken',
+               ], axis=1, inplace=True)
+allBalls.to_pickle('ballData.pkl')
+
+print("Done")
 
 # pathToHawkeye = 'C:/Users/John Steward/Documents/GitHub/BachelorProject/Project/HawkeyeStats-main/mensIPLHawkeyeStats.csv'
 # hawkeyeStats = pd.read_csv(pathToHawkeye)
