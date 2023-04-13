@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fda869e3-372b-470f-996b-3cf7a70b51d8" name="Changes" comment="Data deffo done?">
-      <change beforePath="$PROJECT_DIR$/.idea/BachelorProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BachelorProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="fda869e3-372b-470f-996b-3cf7a70b51d8" name="Changes" comment="Need GPU to run model lol">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/DataPreprocess.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project/GPRegression.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/GPRegression.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project/GPRegression.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,25 +34,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/John Steward/Documents/GitHub/BachelorProject/Project",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/John Steward/Documents/GitHub/BachelorProject/Project&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.GPRegression">
     <configuration name="GPRegression" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="BachelorProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Project" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -140,7 +141,8 @@
       <workItem from="1681221919444" duration="1640000" />
       <workItem from="1681223951851" duration="15495000" />
       <workItem from="1681251663871" duration="182000" />
-      <workItem from="1681251855473" duration="455000" />
+      <workItem from="1681251855473" duration="700000" />
+      <workItem from="1681301411198" duration="5587000" />
     </task>
     <task id="LOCAL-00001" summary="test for other device">
       <created>1675352508723</created>
@@ -240,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681170606518</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Need GPU to run model lol">
+      <created>1681252355362</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1681252355362</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,7 +282,8 @@
     <MESSAGE value="Things are coming together" />
     <MESSAGE value="Replaced all strings (I think)" />
     <MESSAGE value="Data stuff should all be done, can start model stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="Data stuff should all be done, can start model stuff" />
+    <MESSAGE value="Need GPU to run model lol" />
+    <option name="LAST_COMMIT_MESSAGE" value="Need GPU to run model lol" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
