@@ -28,7 +28,8 @@ playedList = []
 addShotTypeList = []
 pathToBall = 'C:/Users/John Steward/Documents/GitHub/BachelorProject/Project/ipl_2022_data/BallData/*'
 ballList = glob.glob(pathToBall)
-
+print(ballList[20])
+index = 0
 for file in ballList:
     # Load the json file into a dataframe and flatten the nested dictionaries
     with open(file, 'r') as f:
@@ -126,7 +127,11 @@ for batsman in batsmanList:
     defendSpin = 0
     defendSeam = 0
     defendMed = 0
+    i = 0
     for file in ballDataFrames:
+        i += 1
+        if file["match.delivery.scoringInformation.score"].item() == -1:
+            print(i)
         if file["match.battingTeam.batsman.name"].item() == batsman:
             totalRuns += file["match.delivery.scoringInformation.score"].item()
             totalBalls += 1
