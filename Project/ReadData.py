@@ -129,9 +129,6 @@ for batsman in batsmanList:
     defendMed = 0
     i = 0
     for file in ballDataFrames:
-        i += 1
-        if file["match.delivery.scoringInformation.score"].item() == -1:
-            print(i)
         if file["match.battingTeam.batsman.name"].item() == batsman:
             totalRuns += file["match.delivery.scoringInformation.score"].item()
             totalBalls += 1
@@ -214,6 +211,9 @@ for batsman in batsmanList:
                'aggression': aggression, 'aggSpin': aggSpin, 'aggSeam': aggSeam, 'aggMed': aggMed,
                'passiveness': passiveness, 'pasSpin': pasSpin, 'pasSeam': pasSeam, 'pasMed': pasMed}
     df = pd.DataFrame(data=batData, index=[0])
+    fileName = "Batsman Files/" + df['batsmanName'].item() + ".pkl"
+   # print(fileName)
+    df.to_pickle(fileName)
 
     batsmanDataList.append(df)
 for file in ballDataFrames:
@@ -298,6 +298,8 @@ for bowler in bowlerList:
     bowlData = {'bowlerName': bowler, 'economy': economy, 'dotRat': dotRat, 'oneRat': oneRat, 'twoRat': twoRat,
                 'threeRat': threeRat, 'fourRat': fourRat, 'sixRat': sixRat, 'wicRat': wicRat}
     df = pd.DataFrame(bowlData, index=[0])
+    fileName = "Bowler Files/"+df['bowlerName'].item()+".pkl"
+    df.to_pickle(fileName)
     bowlDataList.append(df)
 
 for file in finalBallFrames:
