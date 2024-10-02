@@ -28,7 +28,6 @@ playedList = []
 addShotTypeList = []
 pathToBall = 'C:/Users/John Steward/Documents/GitHub/BachelorProject/Project/ipl_2022_data/BallData/*'
 ballList = glob.glob(pathToBall)
-print(ballList[20])
 index = 0
 for file in ballList:
     # Load the json file into a dataframe and flatten the nested dictionaries
@@ -59,7 +58,9 @@ for file in ballList:
              'match.delivery.trajectory.stumpPosition.z', 'match.delivery.trajectory.swing',
              'match.delivery.trajectory.trajectoryData'], axis=1, inplace=True)
     ballDataFrames.append(df)
- # Create a list of players to correspond to a feature vector for each (so far will be a separate dataframe)
+
+ # Create a list of players to correspond to a feature vector for each in separate dataframes
+ # And compile lists of strings within the data to make them categorical
     batsmanName = df["match.battingTeam.batsman.name"]
     if batsmanName.item() not in batsmanList:
         batsmanList.append(batsmanName.item())
@@ -82,12 +83,6 @@ for file in ballList:
     if addShot.item() not in addShotTypeList:
         addShotTypeList.append(addShot.item())
 
-print(deliveryList)
-print(extrasList)
-print(attackedList)
-print(playedList)
-print(addShotTypeList)
-
 # Replacing all relevant strings with a numerical ID
 for file in ballDataFrames:
     for i in range(len(deliveryList)):
@@ -106,6 +101,8 @@ for file in ballDataFrames:
         if addShotTypeList[m] == file["match.delivery.shotInformation.shotTypeAdditional"].item():
             file["match.delivery.shotInformation.shotTypeAdditional"] = file["match.delivery.shotInformation.shotTypeAdditional"].replace(addShotTypeList[m], m)
 
+
+# Create all the batsman feature vectors from the data
 batsmanDataList = []
 for batsman in batsmanList:
     totalRuns = 0
@@ -212,10 +209,10 @@ for batsman in batsmanList:
                'passiveness': passiveness, 'pasSpin': pasSpin, 'pasSeam': pasSeam, 'pasMed': pasMed}
     df = pd.DataFrame(data=batData, index=[0])
     fileName = "Batsman Files/" + df['batsmanName'].item() + ".pkl"
-   # print(fileName)
     df.to_pickle(fileName)
 
     batsmanDataList.append(df)
+# Add the batsman feature vectors to all relevant datapoints
 for file in ballDataFrames:
     for batsman in batsmanDataList:
         if file["match.battingTeam.batsman.name"].item() == batsman["batsmanName"].item():
@@ -235,11 +232,9 @@ for file in ballDataFrames:
             file['pasSpin'] = batsman['pasSpin'].item()
             file['pasSeam'] = batsman['pasSeam'].item()
             file['pasMed'] = batsman['pasMed'].item()
-            #print(finalFile.isnull().values.any())
             finalBallFrames.append(file)
 
-    # file.info()
-    # print(file.isnull().values.any())
+# Create all the bowler feature vectors
 bowlDataList = []
 for bowler in bowlerList:
     totalBalls = 0
@@ -302,6 +297,7 @@ for bowler in bowlerList:
     df.to_pickle(fileName)
     bowlDataList.append(df)
 
+# Add the bowler feature vectors to all relevant datapoints
 for file in finalBallFrames:
     for bowler in bowlDataList:
         if file["match.bowlingTeam.bowler.name"][0] == bowler["bowlerName"].item():
@@ -314,7 +310,6 @@ for file in finalBallFrames:
             file['fourRat'] = bowler['fourRat']
             file['sixRat'] = bowler['sixRat']
             file['wicRat'] = bowler['wicRat']
-            # fullFinalFile.info()
             fullFinalFrames.append(file)
 
 allBalls = pd.concat(fullFinalFrames, ignore_index=True)
